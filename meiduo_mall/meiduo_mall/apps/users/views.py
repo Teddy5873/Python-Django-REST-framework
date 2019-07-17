@@ -3,7 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 
 
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -38,3 +39,16 @@ class MobileCountView(APIView):
         }
 
         return Response(data)
+
+
+# GET /user/
+class UserDetailView(RetrieveAPIView):
+    """用户基本信息"""
+    serializer_class = serializers.UserDetailSerializer
+    permission_classes = [IsAuthenticated]  # 指明必须登录认证后才能访问
+
+    def get_object(self):
+        # 返回当前请求的用户
+        # 在类视图对象中，可以通过类视图对象的属性获取request
+        # 在django的请求request对象中，user属性表明当请请求的用户
+        return self.request.user
