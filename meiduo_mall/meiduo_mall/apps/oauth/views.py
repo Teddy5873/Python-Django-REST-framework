@@ -24,6 +24,7 @@ class QQAuthURLView(APIView):
 class QQAuthUserView(CreateAPIView):
     serializer_class = OAuthQQUserSerializer
 
+
     def get(self,request):
         code = request.query_params.get('code')
 

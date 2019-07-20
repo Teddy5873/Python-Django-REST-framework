@@ -30,4 +30,6 @@ urlpatterns = [
 
     url(r'^oauth/', include('oauth.urls')),
 
+    url(r'', include('areas.urls')),
+
 ]
